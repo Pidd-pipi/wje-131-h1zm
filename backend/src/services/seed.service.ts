@@ -2,12 +2,13 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Material } from '../models/material.entity';
+import { MaterialRequisition } from '../models/materialRequisition.entity';
 import { MaterialUsage } from '../models/materialUsage.entity';
 import { Project } from '../models/project.entity';
 import { SubTask } from '../models/subTask.entity';
 import { TaskPhase } from '../models/taskPhase.entity';
 import { User } from '../models/user.entity';
-import { MaterialUnit, PhaseStatus, Priority, ProjectStatus, TaskStatus, UserRole } from '../types/enums';
+import { MaterialUnit, PhaseStatus, Priority, ProjectStatus, RequisitionStatus, TaskStatus, UserRole } from '../types/enums';
 
 @Injectable()
 export class SeedService implements OnModuleInit {
@@ -17,7 +18,8 @@ export class SeedService implements OnModuleInit {
     @InjectRepository(TaskPhase) private readonly phaseRepository: Repository<TaskPhase>,
     @InjectRepository(SubTask) private readonly taskRepository: Repository<SubTask>,
     @InjectRepository(Material) private readonly materialRepository: Repository<Material>,
-    @InjectRepository(MaterialUsage) private readonly usageRepository: Repository<MaterialUsage>
+    @InjectRepository(MaterialUsage) private readonly usageRepository: Repository<MaterialUsage>,
+    @InjectRepository(MaterialRequisition) private readonly requisitionRepository: Repository<MaterialRequisition>
   ) {}
 
   async onModuleInit() {
@@ -190,6 +192,30 @@ export class SeedService implements OnModuleInit {
         receiverId: users[2].id,
         usedAt: '2026-06-08',
         purpose: '加固施工临边支撑'
+      }
+    ]);
+
+    await this.requisitionRepository.save([
+      {
+        materialId: materials[0].id,
+        projectId: projects[0].id,
+        phaseId: phases[1].id,
+        quantity: '12.00',
+        applicantId: users[1].id,
+        purpose: '四层柱筋绑扎备料',
+        status: RequisitionStatus.Pending
+      },
+      {
+        materialId: materials[2].id,
+        projectId: projects[1].id,
+        phaseId: phases[2].id,
+        quantity: '260.00',
+        applicantId: users[2].id,
+        purpose: '临边支撑加固补充扣件',
+        status: RequisitionStatus.Rejected,
+        rejectReason: '库存低于安全阈值，待采购入库后重新提交',
+        processedById: users[0].id,
+        processedAt: new Date('2026-06-09T09:30:00')
       }
     ]);
   }

@@ -6,6 +6,7 @@ export const apiPaths = {
   subTasks: '/api/sub-tasks',
   materials: '/api/materials',
   materialUsage: '/api/materials/usage',
+  materialRequisitions: '/api/material-requisitions',
   timesheet: '/api/sub-tasks/reports/timesheet',
   auditLogs: '/api/audit-logs'
 };

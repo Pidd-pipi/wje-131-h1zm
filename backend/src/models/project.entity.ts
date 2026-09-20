@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'ty
 import { ProjectStatus } from '../types/enums';
 import { User } from './user.entity';
 import { TaskPhase } from './taskPhase.entity';
+import { MaterialRequisition } from './materialRequisition.entity';
 import { MaterialUsage } from './materialUsage.entity';
 
 @Entity('projects')
@@ -44,4 +45,7 @@ export class Project {
 
   @OneToMany(() => MaterialUsage, (usage) => usage.project)
   materialUsages: MaterialUsage[];
+
+  @OneToMany(() => MaterialRequisition, (requisition) => requisition.project)
+  materialRequisitions: MaterialRequisition[];
 }

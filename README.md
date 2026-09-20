@@ -19,6 +19,7 @@ docker compose up -d
 - 项目详情甘特图：按阶段和子任务展示施工时间线，预留日期调整入口。
 - 任务看板：按 Todo / InProgress / Review / Done 管理子任务状态。
 - 材料管理：材料库存、入库、出库、低库存预警和领用记录筛选。
+- 材料领用审批闭环：申请提交后待审核，同一项目、阶段和材料仅允许一份待审核申请；项目经理批准后事务内扣减库存并生成领用记录（库存不足、重复审批或并发审批时整次回滚）；驳回保留申请与原因且不扣库存，被驳回后可重新提交。
 - 人员工时统计：按人员汇总计划工时、实际工时和利用率。
 - RBAC 权限控制：Admin / ProjectManager / Foreman / Worker 角色贯穿后端中间件、前端路由守卫和按钮操作。
 - 操作日志：关键写操作通过后端审计服务和审计中间件记录。
@@ -168,6 +169,19 @@ docker compose down -v
 - 后端种子：`backend/src/services/seed.service.ts`
 - 前端定义：`frontend/src/types/enums.ts`
 - 前端类型：`frontend/src/types/material.ts`
+
+### RequisitionStatus
+
+- 后端定义：`backend/src/types/enums.ts`
+- 后端实体：`backend/src/models/materialRequisition.entity.ts`
+- 后端服务：`backend/src/services/materialRequisition.service.ts`
+- 后端控制器：`backend/src/controllers/materialRequisition.controller.ts`
+- 后端种子：`backend/src/services/seed.service.ts`
+- 前端定义：`frontend/src/types/enums.ts`
+- 前端类型：`frontend/src/types/material.ts`
+- 前端 API：`frontend/src/api/materialRequisition.ts`
+- 前端共享组件：`frontend/src/components/common/StatusBadge.tsx`
+- 前端页面：`frontend/src/pages/MaterialManage.tsx`
 
 ## License
 

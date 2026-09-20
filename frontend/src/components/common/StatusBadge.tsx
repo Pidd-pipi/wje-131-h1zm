@@ -1,7 +1,7 @@
 import { Badge, Tag } from 'antd';
-import { PhaseStatus, Priority, ProjectStatus, TaskStatus } from '../../types';
+import { PhaseStatus, Priority, ProjectStatus, RequisitionStatus, TaskStatus } from '../../types';
 
-type StatusValue = ProjectStatus | PhaseStatus | TaskStatus | Priority | string;
+type StatusValue = ProjectStatus | PhaseStatus | TaskStatus | Priority | RequisitionStatus | string;
 
 const colors: Record<string, string> = {
   Planning: 'default',
@@ -14,6 +14,8 @@ const colors: Record<string, string> = {
   Todo: 'default',
   Review: 'warning',
   Done: 'success',
+  Approved: 'success',
+  Rejected: 'error',
   Low: 'blue',
   Medium: 'gold',
   High: 'orange',
@@ -31,17 +33,20 @@ const labels: Record<string, string> = {
   Todo: '待办',
   Review: '审核',
   Done: '完成',
+  Approved: '已批准',
+  Rejected: '已驳回',
   Low: '低',
   Medium: '中',
   High: '高',
   Critical: '紧急'
 };
 
-export function StatusBadge({ value }: { value: StatusValue }) {
+export function StatusBadge({ value, text, color }: { value: StatusValue; text?: string; color?: string }) {
   const key = String(value);
-  const color = colors[key] || 'default';
-  if (['processing', 'error', 'success', 'default', 'warning'].includes(color)) {
-    return <Badge status={color as 'processing'} text={labels[key] || key} />;
+  const resolvedColor = color || colors[key] || 'default';
+  const label = text || labels[key] || key;
+  if (['processing', 'error', 'success', 'default', 'warning'].includes(resolvedColor)) {
+    return <Badge status={resolvedColor as 'processing'} text={label} />;
   }
-  return <Tag color={color}>{labels[key] || key}</Tag>;
+  return <Tag color={resolvedColor}>{label}</Tag>;
 }

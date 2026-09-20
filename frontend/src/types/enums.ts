@@ -36,6 +36,12 @@ export enum MaterialUnit {
   CubicMeter = '立方米'
 }
 
+export enum RequisitionStatus {
+  Pending = 'Pending',
+  Approved = 'Approved',
+  Rejected = 'Rejected'
+}
+
 export enum UserRole {
   Admin = 'Admin',
   ProjectManager = 'ProjectManager',

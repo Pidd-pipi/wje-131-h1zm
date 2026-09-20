@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AuditLog } from '../models/auditLog.entity';
 import { Material } from '../models/material.entity';
+import { MaterialRequisition } from '../models/materialRequisition.entity';
 import { MaterialUsage } from '../models/materialUsage.entity';
 import { Project } from '../models/project.entity';
 import { SubTask } from '../models/subTask.entity';
@@ -15,7 +16,7 @@ export function databaseConfig(): TypeOrmModuleOptions {
     username: process.env.DB_USER || 'construction_user',
     password: process.env.DB_PASSWORD || 'construction_password',
     database: process.env.DB_NAME || 'construction_tracker',
-    entities: [Project, TaskPhase, SubTask, Material, MaterialUsage, User, AuditLog],
+    entities: [Project, TaskPhase, SubTask, Material, MaterialUsage, MaterialRequisition, User, AuditLog],
     synchronize: true,
     logging: false
   };

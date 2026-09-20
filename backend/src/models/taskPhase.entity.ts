@@ -3,6 +3,7 @@ import { PhaseStatus, Priority } from '../types/enums';
 import { Project } from './project.entity';
 import { User } from './user.entity';
 import { SubTask } from './subTask.entity';
+import { MaterialRequisition } from './materialRequisition.entity';
 import { MaterialUsage } from './materialUsage.entity';
 
 @Entity('task_phases')
@@ -51,4 +52,7 @@ export class TaskPhase {
 
   @OneToMany(() => MaterialUsage, (usage) => usage.phase)
   materialUsages: MaterialUsage[];
+
+  @OneToMany(() => MaterialRequisition, (requisition) => requisition.phase)
+  materialRequisitions: MaterialRequisition[];
 }
