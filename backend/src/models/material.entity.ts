@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { MaterialUnit } from '../types/enums';
+import { MaterialRequisition } from './materialRequisition.entity';
 import { MaterialUsage } from './materialUsage.entity';
 
 @Entity('materials')
@@ -30,4 +31,7 @@ export class Material {
 
   @OneToMany(() => MaterialUsage, (usage) => usage.material)
   usages: MaterialUsage[];
+
+  @OneToMany(() => MaterialRequisition, (requisition) => requisition.material)
+  requisitions: MaterialRequisition[];
 }

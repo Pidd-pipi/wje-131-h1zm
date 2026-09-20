@@ -42,3 +42,9 @@ export enum UserRole {
   Foreman = 'Foreman',
   Worker = 'Worker'
 }
+
+export enum RequisitionStatus {
+  Pending = 'Pending',
+  Approved = 'Approved',
+  Rejected = 'Rejected'
+}

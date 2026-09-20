@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Material } from './material.entity';
+import { MaterialRequisition } from './materialRequisition.entity';
 import { Project } from './project.entity';
 import { TaskPhase } from './taskPhase.entity';
 import { User } from './user.entity';
@@ -41,4 +42,10 @@ export class MaterialUsage {
 
   @Column({ type: 'text' })
   purpose: string;
+
+  @Column({ nullable: true })
+  requisitionId?: number | null;
+
+  @ManyToOne(() => MaterialRequisition, (requisition) => requisition.usages)
+  requisition?: MaterialRequisition | null;
 }

@@ -3,6 +3,7 @@ import { UserRole } from '../types/enums';
 import { Project } from './project.entity';
 import { TaskPhase } from './taskPhase.entity';
 import { SubTask } from './subTask.entity';
+import { MaterialRequisition } from './materialRequisition.entity';
 import { MaterialUsage } from './materialUsage.entity';
 
 @Entity('users')
@@ -30,4 +31,10 @@ export class User {
 
   @OneToMany(() => MaterialUsage, (usage) => usage.receiver)
   materialUsages: MaterialUsage[];
+
+  @OneToMany(() => MaterialRequisition, (requisition) => requisition.applicant)
+  submittedRequisitions: MaterialRequisition[];
+
+  @OneToMany(() => MaterialRequisition, (requisition) => requisition.reviewedBy)
+  reviewedRequisitions: MaterialRequisition[];
 }

@@ -7,6 +7,7 @@ import { AuditLogMiddleware } from './middlewares/auditLog.middleware';
 import { RequestLoggerMiddleware } from './middlewares/requestLogger.middleware';
 import { AuditLog } from './models/auditLog.entity';
 import { Material } from './models/material.entity';
+import { MaterialRequisition } from './models/materialRequisition.entity';
 import { MaterialUsage } from './models/materialUsage.entity';
 import { Project } from './models/project.entity';
 import { SubTask } from './models/subTask.entity';
@@ -14,6 +15,7 @@ import { TaskPhase } from './models/taskPhase.entity';
 import { User } from './models/user.entity';
 import { AuditRoutesModule } from './routes/audit.routes';
 import { MaterialRoutesModule } from './routes/material.routes';
+import { MaterialRequisitionRoutesModule } from './routes/materialRequisition.routes';
 import { ProjectRoutesModule } from './routes/project.routes';
 import { SubTaskRoutesModule } from './routes/subTask.routes';
 import { TaskPhaseRoutesModule } from './routes/taskPhase.routes';
@@ -23,11 +25,12 @@ import { SeedService } from './services/seed.service';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(databaseConfig()),
-    TypeOrmModule.forFeature([User, Project, TaskPhase, SubTask, Material, MaterialUsage, AuditLog]),
+    TypeOrmModule.forFeature([User, Project, TaskPhase, SubTask, Material, MaterialUsage, MaterialRequisition, AuditLog]),
     ProjectRoutesModule,
     TaskPhaseRoutesModule,
     SubTaskRoutesModule,
     MaterialRoutesModule,
+    MaterialRequisitionRoutesModule,
     AuditRoutesModule
   ],
   providers: [SeedService]
